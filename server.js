@@ -43,9 +43,19 @@ app.post('/scrape', async (req, res) => {
   let browser;
   try {
     browser = await puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
-    });
+  headless: true,
+  args: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-web-security',
+    '--disable-features=IsolateOrigins,site-per-process',
+    '--disable-site-isolation-trials',
+    '--disable-blink-features=AutomationControlled',
+    '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36'
+  ],
+  ignoreHTTPSErrors: true,
+  defaultViewport: null
+});
     const page = await browser.newPage();
     await page.goto(config.url, { waitUntil: 'networkidle2', timeout: 15000 });
 
