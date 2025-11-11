@@ -7,13 +7,13 @@ app.use(express.json());
 
 const scrapers = {
   hubspot: {
-    url: 'https://www.hubspot.com/careers/jobs',
-    search: 'Account Executive',
-    jobSelector: '.job-listing',
-    getTitle: el => el.querySelector('h3')?.innerText?.trim() || 'AE Role',
-    getLink: el => 'https://www.hubspot.com' + el.querySelector('a')?.getAttribute('href'),
-    getId: link => link.match(/\/jobs\/(\d+)/)?.[1] || 'N/A'
-  },
+  url: 'https://www.hubspot.com/careers/jobs',
+  search: 'Account Executive',
+  jobSelector: 'a[data-testid="job-card-link"]',
+  getTitle: el => el.querySelector('h3')?.innerText?.trim() || 'AE Role',
+  getLink: el => 'https://www.hubspot.com' + el.getAttribute('href'),
+  getId: link => link.match(/\/jobs\/(\d+)/)?.[1] || 'N/A'
+}
   salesforce: {
     url: 'https://careers.salesforce.com/en/jobs/',
     search: 'Account Executive',
