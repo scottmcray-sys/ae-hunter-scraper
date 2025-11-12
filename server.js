@@ -64,7 +64,3 @@ app.post('/scrape', async (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`Universal AE Scraper live on ${PORT}`));
-  }
-});
-
-app.listen(PORT, () => console.log(`Running on ${PORT}`));
